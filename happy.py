@@ -1,21 +1,17 @@
-def is_happy(n):
-	t=[]
-	while True:
-		n=sum([int(x)**2 for x in str(n)])
-		if n==1: return True
-		elif n in t: return False
+import sys
 
-		t.append(n)
+def is_happy(val):
+    """Check whether a number is a happy number."""
+    seen = set()
+    while val != 1 and val not in seen:
+        seen.add(val)
+        val = sum([int(x) ** 2 for x in str(val)])
 
-def find_happy(n):
-	L=[]
-	i=1
-	while len(L) is not n:
-		if is_happy(i): L.append(i)
-		i+=1
+    return val == 1
 
-	return L
+def find_happy(N):
+    """Return the first N happy numbers."""
+    return [i for i in range(N) if is_happy(i)]
 
 if __name__=="__main__":
-	
-	print(find_happy(int(input())))
+    print(find_happy(int(sys.argv[1]) + 1))
